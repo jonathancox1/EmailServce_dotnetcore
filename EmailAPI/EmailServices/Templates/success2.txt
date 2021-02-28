@@ -1,0 +1,36 @@
+﻿                        <p>We will get to roasting it right away, we typically roast on Sunday and ship on Monday</p>
+                        <p>You'll recieve another email once you're order is complete and ready to ship</p>
+                        <p>✌</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+            <!-- END MAIN CONTENT AREA -->
+            </table>
+            <!-- END CENTERED WHITE CONTAINER -->
+
+            <!-- START FOOTER -->
+            <div class="footer">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="content-block">
+                    <span class="apple-link">Lazy Bones Coffee, Atlanta Georgia</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="content-block powered-by">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- END FOOTER -->
+
+          </div>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>                       
