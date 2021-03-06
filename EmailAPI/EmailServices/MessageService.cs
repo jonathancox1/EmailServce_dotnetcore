@@ -1,5 +1,6 @@
 ﻿
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Configuration;
 using MimeKit;
 using System.Collections.Generic;
 using System.IO;
@@ -12,23 +13,24 @@ namespace EmailAPI.EmailServices
     {
         private string _fromDisplayName = "Lazy Bones";
         private string _fromEmailAddress = "lazybonescoffeeco@gmail.com";
+
         public string toName { get; set; }
         public string toEmail { get; set; }
         public List<string> coffees { get; set; }
 
-        public async Task SendEmailAsync(MimeMessage email)
+        public async Task SendEmailAsync(MimeMessage email, IConfiguration config)
         {
             using(var client = new SmtpClient())
             {
-                await client.ConnectAsync("smtp.gmail.com", 465, true);
+                await client.ConnectAsync(config["EmailSettings:Host"], 465, true);
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
-                await client.AuthenticateAsync("emailAddress", "password");
+                await client.AuthenticateAsync(config["EmailSettings:Email"], config["EmailSettings:Password"]);
                 await client.SendAsync(email);
                 await client.DisconnectAsync(true);
             }
         }
 
-        public async void EmailBuilderAsync(MessageService requestBody, string subject, string type)
+        public async void EmailBuilderAsync(MessageService requestBody, string subject, string type, IConfiguration config)
         {
             var success1 = File.ReadAllText(@"C:\Users\Jonathan Cox\source\repos\EmailAPI\EmailAPI\EmailServices\Templates\success1.txt");
             var success2 = File.ReadAllText(@"C:\Users\Jonathan Cox\source\repos\EmailAPI\EmailAPI\EmailServices\Templates\success2.txt");
@@ -63,7 +65,7 @@ namespace EmailAPI.EmailServices
             email.Body = body.ToMessageBody();
 
             // send
-            await SendEmailAsync(email);
+            await SendEmailAsync(email, config);
         }
     }
 }
